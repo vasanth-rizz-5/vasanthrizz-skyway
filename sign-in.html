@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./img/favicon.ico">
+    <!-- Primary Meta Tags -->
+    <title>Vasanthrizz - Secure Login Form</title>
+    <meta name="title" content="Vasanthrizz - Secure Login Form">
+    <meta name="description" content="Access your Vasanthrizz dashboard securely. Fast and safe login form for members.">
+
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="Vasanthrizz, login form, secure login, user login, member access, login page, dashboard access, authentication, web login, login portal">
+    <meta name="author" content="Vasanth Rizz">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vasanth-rizz-5.github.io/vasanthrizz-official/">
+    <meta property="og:title" content="Vasanthrizz - Secure Login Form">
+    <meta property="og:description" content="Access your Vasanthrizz dashboard securely. Fast and safe login form for members.">
+    <meta property="og:image" content="./img/banner.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://vasanth-rizz-5.github.io/vasanthrizz-official/">
+    <meta name="twitter:title" content="Vasanthrizz - Secure Login Form">
+    <meta name="twitter:description" content="Access your Vasanthrizz dashboard securely. Fast and safe login form for members.">
+    <meta name="twitter:image" content="./img/banner.png">
+
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtHo1Btk4L99igr8syfRlRMOcuODoiU7foP5qbw-vdN7Idggy6G6TPS50pNtxTzs8uM9WUzD0mxKFLPt2DOoh04lYtRaaIRQ96uJftM4oxInxGg1P9U6KONm2DyosLHWVVBXH2rzPIa2oYfUtl6Q8rquxdJQ9osmXQ_77ka06sqaKn1tF1U3YvhhkrEf48/s1600/Free-Logo-Maker-Get-Custom-Logo-Designs-in-Minutes-Looka-04-14-2025_11_28_AM.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#f97316'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6b7280;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .auth-container {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .social-btn {
+            transition: all 0.2s ease;
+        }
+        .social-btn:hover {
+            transform: translateY(-2px);
+        }
+        .feature-link {
+            transition: all 0.2s ease;
+        }
+        .feature-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .custom-checkbox {
+            position: relative;
+            cursor: pointer;
+        }
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 18px;
+            width: 18px;
+            background-color: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+        }
+        .custom-checkbox:hover input ~ .checkmark {
+            background-color: #f3f4f6;
+        }
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .custom-checkbox .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    <div class="auth-container bg-white rounded-lg shadow-lg w-full max-w-md overflow-hidden"> <!-- Changed max-w-4xl to max-w-md -->
+        <!-- Single column layout for better centering -->
+        <div class="w-full p-8">
+            <!-- Back to Store Link -->
+            <div class="mb-8">
+                <a href="index.html" data-readdy="true" class="inline-flex items-center text-gray-600 hover:text-primary transition-colors">
+                    <span class="w-5 h-5 flex items-center justify-center mr-2">
+                        <i class="ri-arrow-left-line"></i>
+                    </span>
+                    <span>Back</span>
+                </a>
+            </div>
+            
+            <!-- Logo and Welcome Text -->
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-['Pacifico'] text-primary mb-2">Vasanth Rizz</h1>
+                <p class="text-gray-600">Welcome to your account dashboard</p>
+            </div>
+            
+            <!-- Tab Navigation -->
+            <div class="flex border-b border-gray-200 mb-8">
+                <button id="login-tab" class="tab-btn flex-1 py-3 font-medium text-center border-b-2 border-primary text-primary">Login</button>
+                <button id="register-tab" class="tab-btn flex-1 py-3 font-medium text-center border-b-2 border-transparent text-gray-500 hover:text-gray-700">Register</button>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="login-content" class="tab-content active">
+                <form>
+                    <div class="mb-4">
+                        <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 flex items-center justify-center">
+                                <i class="ri-mail-line"></i>
+                            </span>
+                            <input type="email" id="login-email" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded text-sm focus:outline-none focus:border-primary" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-1">
+                            <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <a href="#" class="text-xs text-primary hover:underline">Forgot Password?</a>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 flex items-center justify-center">
+                                <i class="ri-lock-line"></i>
+                            </span>
+                            <input type="password" id="login-password" class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded text-sm focus:outline-none focus:border-primary" placeholder="Enter your password">
+                            <span class="password-toggle w-5 h-5 flex items-center justify-center" data-for="login-password">
+                                <i class="ri-eye-off-line"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-button font-medium hover:bg-indigo-700 transition duration-200 !rounded-button whitespace-nowrap">Login</button>
+                </form>
+                
+                <div class="mt-6">
+                    <div class="relative flex items-center justify-center">
+                        <div class="border-t border-gray-200 w-full absolute"></div>
+                        <div class="bg-white px-4 relative z-10 text-sm text-gray-500">or continue with</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-3 mt-4">
+                        <button class="social-btn flex justify-center items-center py-2.5 border border-gray-300 rounded bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap">
+                            <span class="w-5 h-5 flex items-center justify-center mr-2 text-red-600">
+                                <i class="ri-google-fill"></i>
+                            </span>
+                            <span class="text-sm">Google</span>
+                        </button>
+                        <button class="social-btn flex justify-center items-center py-2.5 border border-gray-300 rounded bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap">
+                            <span class="w-5 h-5 flex items-center justify-center mr-2 text-blue-600">
+                                <i class="ri-facebook-fill"></i>
+                            </span>
+                            <span class="text-sm">Facebook</span>
+                        </button>
+                        <button class="social-btn flex justify-center items-center py-2.5 border border-gray-300 rounded bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap">
+                            <span class="w-5 h-5 flex items-center justify-center mr-2 text-black">
+                                <i class="ri-apple-fill"></i>
+                            </span>
+                            <span class="text-sm">Apple</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Register Form -->
+            <div id="register-content" class="tab-content">
+                <form>
+                    <div class="mb-4">
+                        <label for="register-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 flex items-center justify-center">
+                                <i class="ri-user-line"></i>
+                            </span>
+                            <input type="text" id="register-name" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded text-sm focus:outline-none focus:border-primary" placeholder="Enter your full name">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="register-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 flex items-center justify-center">
+                                <i class="ri-mail-line"></i>
+                            </span>
+                            <input type="email" id="register-email" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded text-sm focus:outline-none focus:border-primary" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="register-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 flex items-center justify-center">
+                                <i class="ri-lock-line"></i>
+                            </span>
+                            <input type="password" id="register-password" class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded text-sm focus:outline-none focus:border-primary" placeholder="Create a password">
+                            <span class="password-toggle w-5 h-5 flex items-center justify-center" data-for="register-password">
+                                <i class="ri-eye-off-line"></i>
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Password must be at least 8 characters long</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="register-confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 flex items-center justify-center">
+                                <i class="ri-lock-line"></i>
+                            </span>
+                            <input type="password" id="register-confirm-password" class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded text-sm focus:outline-none focus:border-primary" placeholder="Confirm your password">
+                            <span class="password-toggle w-5 h-5 flex items-center justify-center" data-for="register-confirm-password">
+                                <i class="ri-eye-off-line"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="flex items-center custom-checkbox">
+                            <input type="checkbox" class="hidden">
+                            <span class="checkmark"></span>
+                            <span class="ml-7 text-sm text-gray-700">I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a></span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-button font-medium hover:bg-indigo-700 transition duration-200 !rounded-button whitespace-nowrap">Create Account</button>
+                </form>
+                
+                <div class="mt-6">
+                    <div class="relative flex items-center justify-center">
+                        <div class="border-t border-gray-200 w-full absolute"></div>
+                        <div class="bg-white px-4 relative z-10 text-sm text-gray-500">or register with</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-3 mt-4">
+                        <button class="social-btn flex justify-center items-center py-2.5 border border-gray-300 rounded bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap">
+                            <span class="w-5 h-5 flex items-center justify-center mr-2 text-red-600">
+                                <i class="ri-google-fill"></i>
+                            </span>
+                            <span class="text-sm">Google</span>
+                        </button>
+                        <button class="social-btn flex justify-center items-center py-2.5 border border-gray-300 rounded bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap">
+                            <span class="w-5 h-5 flex items-center justify-center mr-2 text-blue-600">
+                                <i class="ri-facebook-fill"></i>
+                            </span>
+                            <span class="text-sm">Facebook</span>
+                        </button>
+                        <button class="social-btn flex justify-center items-center py-2.5 border border-gray-300 rounded bg-white hover:bg-gray-50 !rounded-button whitespace-nowrap">
+                            <span class="w-5 h-5 flex items-center justify-center mr-2 text-black">
+                                <i class="ri-apple-fill"></i>
+                            </span>
+                            <span class="text-sm">Apple</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab Switching
+            const loginTab = document.getElementById('login-tab');
+            const registerTab = document.getElementById('register-tab');
+            const loginContent = document.getElementById('login-content');
+            const registerContent = document.getElementById('register-content');
+            
+            loginTab.addEventListener('click', function() {
+                loginTab.classList.add('border-primary', 'text-primary');
+                registerTab.classList.remove('border-primary', 'text-primary');
+                registerTab.classList.add('border-transparent', 'text-gray-500');
+                
+                loginContent.classList.add('active');
+                registerContent.classList.remove('active');
+            });
+            
+            registerTab.addEventListener('click', function() {
+                registerTab.classList.add('border-primary', 'text-primary');
+                loginTab.classList.remove('border-primary', 'text-primary');
+                loginTab.classList.add('border-transparent', 'text-gray-500');
+                
+                registerContent.classList.add('active');
+                loginContent.classList.remove('active');
+            });
+            
+            // Password Toggle
+            const passwordToggles = document.querySelectorAll('.password-toggle');
+            passwordToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const passwordField = document.getElementById(this.getAttribute('data-for'));
+                    const icon = this.querySelector('i');
+                    
+                    if (passwordField.type === 'password') {
+                        passwordField.type = 'text';
+                        icon.classList.remove('ri-eye-off-line');
+                        icon.classList.add('ri-eye-line');
+                    } else {
+                        passwordField.type = 'password';
+                        icon.classList.remove('ri-eye-line');
+                        icon.classList.add('ri-eye-off-line');
+                    }
+                });
+            });
+            
+            // Form Validation (Basic Example)
+            const loginForm = document.querySelector('#login-content form');
+            const registerForm = document.querySelector('#register-content form');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                if (!email || !password) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                // Here you would typically send the data to your server
+                console.log('Login attempt with:', { email });
+            });
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('register-name').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+                const termsChecked = this.querySelector('input[type="checkbox"]').checked;
+                
+                if (!name || !email || !password || !confirmPassword) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                if (!termsChecked) {
+                    alert('Please agree to the Terms of Service and Privacy Policy');
+                    return;
+                }
+                
+                // Here you would typically send the data to your server
+                console.log('Registration attempt with:', { name, email });
+            });
+        });
+    </script>
+</body>
+</html>
